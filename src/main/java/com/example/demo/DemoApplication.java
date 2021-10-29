@@ -14,6 +14,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    /*
     @RestController
     static class BootController {
         @GetMapping("/pudding/{name}")
@@ -21,5 +22,6 @@ public class DemoApplication {
             return ResponseEntity.ok("Hey " + name + ", do you like banana pudding?");
         }
     }
+     */
 
 }
