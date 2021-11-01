@@ -1,4 +1,4 @@
-package com.example.demo.securityConfig;
+package api.database.account.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -24,14 +26,17 @@ public class CovidAlertSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/login*").permitAll()
+                .antMatchers("/register*").permitAll()
                 .antMatchers("/static/css/**", "/static/js/**", "/images/**").permitAll()
                 .antMatchers("/index").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/doLogin")
                 .failureUrl("/login?error=true").permitAll()
-                .defaultSuccessUrl("/", true);
+                .defaultSuccessUrl("/", true)
+                .and().rememberMe().key("secretKey").tokenRepository(tokenRepository());
     }
+
 
 /*
     @Override
@@ -44,5 +49,12 @@ public class CovidAlertSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public PersistentTokenRepository tokenRepository() {
+        JdbcTokenRepositoryImpl token = new JdbcTokenRepositoryImpl();
+        token.setDataSource(dataSource);
+        return token;
     }
 }

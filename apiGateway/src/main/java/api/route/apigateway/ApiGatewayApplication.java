@@ -16,9 +16,11 @@ public class ApiGatewayApplication {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("pudding_route", r -> r.path("/pudding/**").and().method("GET")
-                        .uri("http://localhost:8080"))
-                .route("pie_route", r -> r.path("/pie/**").and().method("GET")
+                .route("home_route", r -> r.path("/").and().method("GET")
+                        .uri("http://localhost:8081"))
+                .route("auth_route", r -> r.path("/login").and().method("GET")
+                        .uri("http://localhost:8081"))
+                .route("register_route", r -> r.path("/register").and().method("GET")
                         .uri("http://localhost:8081"))
                 .route("users_route", r -> r.path("/api/users/**").and().method("GET", "POST", "PUT", "DELETE")
                         .uri("http://localhost:8081"))
