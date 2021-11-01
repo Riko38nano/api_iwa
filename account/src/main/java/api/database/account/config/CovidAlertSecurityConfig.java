@@ -34,18 +34,16 @@ public class CovidAlertSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/doLogin")
                 .failureUrl("/login?error=true").permitAll()
                 .defaultSuccessUrl("/", true)
+                .and().logout().permitAll()
                 .and().rememberMe().key("secretKey").tokenRepository(tokenRepository());
     }
 
-
-/*
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().passwordEncoder(passwordEncoder()).dataSource(dataSource)
-                .withUser("admin").password(passwordEncoder().encode("toto"))
-                .disabled(false).roles("USER", "ADMIN");
+        auth.jdbcAuthentication().passwordEncoder(passwordEncoder()).dataSource(dataSource);
+                //.withUser("admin").password(passwordEncoder().encode("toto"))
+                //.disabled(false).roles("USER", "ADMIN");
     }
- */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
