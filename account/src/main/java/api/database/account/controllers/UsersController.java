@@ -1,11 +1,14 @@
 package api.database.account.controllers;
 
+import api.database.account.models.Authorities;
 import api.database.account.models.User;
+import api.database.account.repositories.AuthoritiesRepository;
 import api.database.account.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,6 +20,12 @@ import java.util.List;
 public class UsersController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthoritiesController authoritiesController;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<User> list() {
@@ -35,7 +44,15 @@ public class UsersController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody final User user) {
-        return userRepository.saveAndFlush(user);
+        // Encrypt password
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User newUser = userRepository.saveAndFlush(user);
+
+        // create an authority object
+        Authorities auth = new Authorities(user.getUsername(), "ROLE_USER");
+        authoritiesController.create(auth);
+
+        return newUser;
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)

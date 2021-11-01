@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -27,6 +28,7 @@ public class CovidAlertSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login*").permitAll()
                 .antMatchers("/register*").permitAll()
+                .antMatchers("/doRegister*").permitAll()
                 .antMatchers("/static/css/**", "/static/js/**", "/images/**").permitAll()
                 .antMatchers("/index").permitAll()
                 .anyRequest().authenticated()
@@ -34,7 +36,12 @@ public class CovidAlertSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/doLogin")
                 .failureUrl("/login?error=true").permitAll()
                 .defaultSuccessUrl("/", true)
-                .and().logout().permitAll()
+                .and().logout().logoutSuccessUrl("/login?logout=true")
+                .logoutRequestMatcher(
+                        new AntPathRequestMatcher("/doLogout", "GET")
+                )
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID").permitAll()
                 .and().rememberMe().key("secretKey").tokenRepository(tokenRepository());
     }
 

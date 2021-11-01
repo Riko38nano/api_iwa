@@ -14,6 +14,11 @@ public class Authorities {
     private String username;
     private String authority;
 
+    public Authorities(String username, String role_user) {
+        this.username = username;
+        this.authority = role_user;
+    }
+
     public long getAuthority_id() {
         return authority_id;
     }

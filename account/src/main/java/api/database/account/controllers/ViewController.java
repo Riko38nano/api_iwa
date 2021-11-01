@@ -22,7 +22,7 @@ public class ViewController {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UsersController usersController;
 
     /**
      * index page
@@ -43,11 +43,7 @@ public class ViewController {
             return "register.jsp?user=true";
         }
         else {
-            // Encrypt password
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            // Create an Authority obj
-
-            userRepository.saveAndFlush(user);
+            usersController.create(user);
             return "login";
         }
     }

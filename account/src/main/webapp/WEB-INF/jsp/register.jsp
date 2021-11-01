@@ -13,8 +13,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Login Page">
 <title>Page d'authentification</title>
-<link rel="stylesheet" href="register_files/bootstrap.min.css"
-      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <meta name="theme-color" content="#563d7c">
 <style>
     .errorblock {
@@ -74,6 +72,8 @@
                    name="matchingPassword"
                    id="matchingPassword"
                    placeholder="Confirm Entered Password above"/>
+
+            <input type="hidden" id="enabled" name="enabled" value="true">
         </div>
         <div><input type="submit" class="btn btn-lg btn-primary" style="margin-top: 20px;" role="button"
                     value="Signup"></div>

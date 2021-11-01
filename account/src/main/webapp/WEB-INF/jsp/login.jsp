@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Login Page">
     <title>Sign In</title>
-    <link rel="stylesheet" href="login_files/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <meta name="theme-color" content="#563d7c">
     <style>
         .errorblock {
@@ -30,12 +28,15 @@
     <% if (request.getParameter("error") != null) { %>
     <div class="errorblock">Invalid Username and Password</div>
     <% } %>
+
     <% if (request.getParameter("logout") != null) { %>
     <div class="alert alert-success" role="alert">Logout was successful</div>
     <% } %>
+
     <% if (request.getParameter("confirm") != null) { %>
     <div class="alert alert-success" role="alert">User creation is confirmed. Please log in</div>
     <% } %>
+
     <form:form action="/doLogin" method="POST">
         <label for="username">User name: </label>
         <input type="text" id="username" name="username" autocomplete="off"/>
