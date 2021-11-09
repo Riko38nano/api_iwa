@@ -16,6 +16,9 @@ $ docker cp ./script/create_tables_covid.sql postgres-covid:/create_tables.sql
 ### urls, pass et user de la base local
 
 ### tous les microservice doivent etre lancé séparément dans le tooltab "Gradle"
+### il faut ajouter les microservices à la main avec le + du menu Gradle et
+### séléctionner "account", "apiGateway"
+
 
 ### l'apiGateway écoute sur le port 9090
 ### sur les routes
