@@ -20,3 +20,13 @@ $ docker cp ./script/create_tables_covid.sql postgres-covid:/create_tables.sql
 ### l'apiGateway écoute sur le port 9090
 ### sur les routes
 ### /api/users pour le ms account
+### /pie/{nom} pour l'exemple
+
+### la config de securité du ms "account" créer un user root admin
+### name : admin
+### pass : toto
+### pour relancer l'app il faut commenter ses lignes
+### (L51, 52 dans CovidAlertSecurityConfig package config dans account)
+
+
+### 
