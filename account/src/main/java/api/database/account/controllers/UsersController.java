@@ -4,8 +4,10 @@ import api.database.account.models.Authorities;
 import api.database.account.models.User;
 import api.database.account.repositories.AuthoritiesRepository;
 import api.database.account.repositories.UserRepository;
+import api.database.account.util.OnCreateUserEvent;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +28,9 @@ public class UsersController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     @GetMapping
     public List<User> list() {
@@ -51,6 +56,8 @@ public class UsersController {
         // create an authority object
         Authorities auth = new Authorities(user.getUsername(), "ROLE_USER");
         authoritiesController.create(auth);
+
+        eventPublisher.publishEvent(new OnCreateUserEvent("/", user));
 
         return newUser;
     }
