@@ -4,7 +4,7 @@ $ sudo bash ./script/init_db.sh
 start a docker on localhost:5432 for the database
 
 ### this does not create the database in the docker
-## enter docker
+### Si nécessaire pour créer la base
 $ sudo docker exec -it postgres-covid psql -U postgres
 -# create database covid_alert_db;
 -# \q
@@ -16,7 +16,7 @@ $ docker cp ./script/create_tables_covid.sql postgres-covid:/create_tables.sql
 ### urls, pass et user de la base local
 
 ### tous les microservice doivent etre lancé séparément dans le tooltab "Gradle"
-### il faut ajouter les microservices à la main avec le + du menu Gradle et
+### il faut ajouter les microservices à la main avec le "+" du menu Gradle et
 ### séléctionner "account", "apiGateway"
 
 
@@ -29,7 +29,7 @@ $ docker cp ./script/create_tables_covid.sql postgres-covid:/create_tables.sql
 ### name : admin
 ### pass : toto
 ### pour relancer l'app il faut commenter ses lignes
-### (L51, 52 dans CovidAlertSecurityConfig package config dans account)
+### (L51, 52 dans CovidAlertSecurityConfig, package "config" dans account)
 
 
 ### 
