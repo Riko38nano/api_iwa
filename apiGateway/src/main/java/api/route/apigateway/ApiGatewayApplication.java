@@ -30,7 +30,8 @@ public class ApiGatewayApplication {
                         .uri("http://localhost:8081"))
                 .route("users_route", r -> r.path("/api/users/**").and().method("GET", "POST", "PUT", "DELETE")
                         .uri("http://localhost:8081"))
+                .route("confirmUser_route", r -> r.path("/userConfirm*").and().method("GET")
+                        .uri("http://localhost:8081"))
                 .build();
     }
-
 }

@@ -53,11 +53,11 @@ public class UsersController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser = userRepository.saveAndFlush(user);
 
+        eventPublisher.publishEvent(new OnCreateUserEvent("/", user));
+
         // create an authority object
         Authorities auth = new Authorities(user.getUsername(), "ROLE_USER");
         authoritiesController.create(auth);
-
-        eventPublisher.publishEvent(new OnCreateUserEvent("/", user));
 
         return newUser;
     }

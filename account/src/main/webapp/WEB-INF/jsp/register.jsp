@@ -32,7 +32,7 @@
     <div class="errorblock">A user with the same username already exists</div>
     <% } %>
     <% if (request.getParameter("confirm") != null) { %>
-    <div class="errorblock">No confirmation is possible</div>
+    <div class="errorblock">Please log in</div>
     <% } %>
     <% if (request.getParameter("expired") != null) { %>
     <div class="errorblock">The registration has expired. Please re-sign-up</div>

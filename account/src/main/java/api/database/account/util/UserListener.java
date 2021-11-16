@@ -7,16 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 public class UserListener implements ApplicationListener<OnCreateUserEvent> {
     @Override
     public void onApplicationEvent(OnCreateUserEvent event) {
         this.confirmCreateUser(event);
     }
 
-    private String serverUrl = "http://localhost:8080";
+    private String serverUrl = "http://locahost:8081";
 
     @Autowired
     private JavaMailSender mailSender;
