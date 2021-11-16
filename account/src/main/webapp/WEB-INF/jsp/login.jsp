@@ -18,7 +18,6 @@
 </head>
 
 <body>
-<%@ page import="java.util.Enumeration" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -49,6 +48,9 @@
         <input type="submit" value="Login" role="button" class="btn btn-lg btn-primary"/>
     </form:form>
     If you don't have an account yet, sign up <a href="http://localhost:9090/register">here</a>
+
+
+    <a href="/forgetPassword">Forgot your pass ?</a>
 </div>
 
 </body>

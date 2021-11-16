@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,6 +34,7 @@ public class UsersController {
     private ApplicationEventPublisher eventPublisher;
 
     @GetMapping
+    @Secured("ROLE_ADMIN")
     public List<User> list() {
         return userRepository.findAll();
     }

@@ -2,15 +2,13 @@ package api.database.account.controllers;
 
 import api.database.account.models.User;
 import api.database.account.repositories.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.function.Function;
@@ -23,6 +21,9 @@ public class ViewController {
 
     @Autowired
     private UsersController usersController;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * index page
@@ -46,6 +47,32 @@ public class ViewController {
             usersController.create(user);
             return "login";
         }
+    }
+
+    @GetMapping("/userConfirm")
+    public String confirm() {return "userConfirm";}
+
+    @GetMapping("/forgetPassword")
+    public String forgetPage() {return "forgetPassword";}
+
+    @GetMapping("/didForgetPass")
+    public String forget(@RequestParam String username, @RequestParam String email) {
+        User userDB = userRepository.findByUsername(username);
+        if((userDB.getUsername().equals(username)) && (userDB.getEmail().equals(email))) {
+            // Send email with link below
+            return "forgetPassword.jsp?confirm=true&username=" + username;
+        } else {
+            return "forgetPassword.jsp?error=true";
+        }
+    }
+
+    @PostMapping("/confirmNewPass")
+    public String confirmPass(@RequestParam String username, @RequestParam String password) {
+        User existingUser = userRepository.findByUsername(username);
+        existingUser.setPassword(passwordEncoder.encode(password));
+        userRepository.saveAndFlush(existingUser);
+
+        return "index";
     }
 
     @GetMapping("/changeUser")

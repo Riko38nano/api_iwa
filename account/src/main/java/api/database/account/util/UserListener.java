@@ -18,7 +18,7 @@ public class UserListener implements ApplicationListener<OnCreateUserEvent> {
         this.confirmCreateUser(event);
     }
 
-    private String serverUrl = "http://locahost:8081";
+    private String serverUrl = "http://localhost:8081";
 
     @Autowired
     private JavaMailSender mailSender;
@@ -34,6 +34,7 @@ public class UserListener implements ApplicationListener<OnCreateUserEvent> {
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(token);
         verificationToken.setExpiryDate(verificationToken.calculateExpiryDate(VerificationToken.EXPIRATION));
+        verificationToken.setUsername(user.getUsername());
         verificationTokenRepository.saveAndFlush(verificationToken);
 
         // get email
