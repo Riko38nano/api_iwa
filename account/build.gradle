@@ -39,8 +39,22 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+    // Keycloak
+    implementation 'org.keycloak:keycloak-spring-boot-starter'
+
     implementation "org.apache.kafka:kafka-streams:2.8.1"
     runtimeOnly 'org.postgresql:postgresql:42.2.24.jre7'
+}
+
+// Keycloak
+ext {
+    set('keycloakVersion', '15.0.2')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.keycloak.bom:keycloak-adapter-bom:${keycloakVersion}"
+    }
 }
 
 test {
