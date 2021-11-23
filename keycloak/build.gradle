@@ -1,0 +1,63 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'api.secure'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '1.2.1.RELEASE', ext: 'pom'
+
+    //implementation 'org.springframework.boot:spring-boot-starter-parent'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-starter-freemarker"
+    implementation 'org.springframework:spring-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Keycloak
+    implementation 'org.keycloak:keycloak-spring-boot-starter'
+
+    // https://mvnrepository.com/artifact/net.rossillo.mvc.cache/spring-mvc-cache-control
+    implementation group: 'net.rossillo.mvc.cache', name: 'spring-mvc-cache-control', version: '1.1.1-RELEASE'
+
+    implementation "net.sourceforge.htmlunit:htmlunit"
+    implementation "org.seleniumhq.selenium:selenium-api"
+    implementation "org.seleniumhq.selenium:htmlunit-driver"
+    implementation "org.springframework.boot:spring-boot-starter-test"
+    implementation group:"org.keycloak", name: "keycloak-test-helper", version: "15.0.2"
+    implementation "org.apache.httpcomponents:httpclient"
+
+    // https://mvnrepository.com/artifact/org.glassfish/javax.json
+    implementation group: 'org.glassfish', name: 'javax.json', version: '1.0.4'
+
+    // https://mvnrepository.com/artifact/org.eclipse/yasson
+    testImplementation group: 'org.eclipse', name: 'yasson', version: '1.0.1'
+}
+
+// Keycloak
+ext {
+    set('keycloakVersion', '15.0.2')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.keycloak.bom:keycloak-adapter-bom:${keycloakVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
