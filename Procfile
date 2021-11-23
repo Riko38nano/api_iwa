@@ -1,0 +1,1 @@
+web: java -Dserver.port=9090 -jar build/libs/demo-0.0.1-SNAPSHOT.jar
