@@ -16,4 +16,6 @@ public class AlertCovidController {
     public AlertCovid get(@PathVariable String username) {
         return covidAlertRepository.findByUsername(username);
     }
+
+
 }
