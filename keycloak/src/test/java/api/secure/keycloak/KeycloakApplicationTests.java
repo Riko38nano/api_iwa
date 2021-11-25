@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = {ProductApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = {KeycloakApplication.class})
 public class KeycloakApplicationTests {
 
     public static final String KEYCLOAK_URL = "http://localhost:8180/auth";
