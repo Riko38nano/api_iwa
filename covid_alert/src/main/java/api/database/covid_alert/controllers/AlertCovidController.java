@@ -26,6 +26,7 @@ public class AlertCovidController {
     public Vaccine getVaccinated(@RequestParam String username) {
         Vaccine newVaccine = new Vaccine();
         newVaccine.setUsername(username);
+        newVaccine.setVaccinated(true);
         return vaccineRepository.saveAndFlush(newVaccine);
     }
 

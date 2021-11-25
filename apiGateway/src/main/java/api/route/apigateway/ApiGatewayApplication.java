@@ -32,6 +32,10 @@ public class ApiGatewayApplication {
                         .uri("http://localhost:8081"))
                 .route("confirmUser_route", r -> r.path("/userConfirm*").and().method("GET")
                         .uri("http://localhost:8081"))
+                .route("covid_alert_route", r -> r.path("/alert/*").and().method("GET")
+                        .uri("http://localhost:8082"))
+                .route("covid_vaccine_route", r -> r.path("/vaccine").and().method("GET")
+                        .uri("http://localhost:8082"))
                 .build();
     }
 }
